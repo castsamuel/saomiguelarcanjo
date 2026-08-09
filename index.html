@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071427">
+  <meta name="description" content="Painel pessoal para a Quaresma de São Miguel Arcanjo.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style-fix.css">
+  <title>Quaresma de São Miguel</title>
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+  <section class="welcome" id="welcome" aria-modal="true" role="dialog" aria-labelledby="welcome-title" hidden>
+    <div class="welcome-card">
+      <span class="cross">✠</span>
+      <p class="eyebrow">Paz e perseverança</p>
+      <h1 id="welcome-title">Bem-vindo à sua Quaresma</h1>
+      <p>Um espaço simples para acompanhar sua oração, penitência e caminhada diária com São Miguel Arcanjo.</p>
+      <button class="button primary" id="start-journey" type="button" onclick="document.getElementById('welcome').hidden=true; try { localStorage.setItem('quaresma-welcome','seen'); } catch (error) {}">Começar a caminhada</button>
+    </div>
+  </section>
+
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Ir para o início"><span>✠</span> <strong>São Miguel</strong></a>
+    <div class="header-actions">
+      <time id="clock" aria-label="Horário atual"></time>
+      <button class="icon-button" id="theme-toggle" title="Alternar tema" aria-label="Alternar tema">☼</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero section" id="inicio">
+      <div class="hero-copy">
+        <p class="eyebrow">15 de agosto a 29 de setembro</p>
+        <h1>Quaresma de<br><em>São Miguel Arcanjo</em></h1>
+        <p class="motto">“Quem como Deus?”</p>
+        <div class="today-line"><span id="today-date"></span><span aria-hidden="true">•</span><span id="today-weekday"></span></div>
+        <div class="journey-state" id="journey-state" aria-live="polite"></div>
+        <div class="progress-wrap" id="progress-wrap">
+          <div class="progress-label"><span id="progress-title">Caminhada</span><strong id="progress-percent">0%</strong></div>
+          <div class="progress-track" role="progressbar" aria-label="Progresso da Quaresma" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progress-bar"></span></div>
+          <div class="progress-meta"><span><b id="days-completed">0</b> dias concluídos</span><span><b id="days-remaining">40</b> restantes</span></div>
+        </div>
+        <div class="hero-actions"><a class="button primary" href="#calendario">Ver calendário <span>↓</span></a><button class="button ghost" id="notify-button">Ativar lembretes</button></div>
+      </div>
+      <div class="saint-visual" aria-label="Ilustração simbólica de São Miguel Arcanjo">
+        <img src="assets/sao-miguel.svg" alt="São Miguel Arcanjo em ilustração dourada e azul">
+      </div>
+    </section>
+
+    <section class="section quote-card" aria-label="Frase do dia"><span class="quote-mark">“</span><p id="daily-quote"></p><span class="quote-source">Frase para hoje</span></section>
+
+    <section class="section grid two-columns" id="pratica">
+      <article class="panel penance-panel">
+        <p class="eyebrow">Minha penitência</p>
+        <h2>🍬 Abster-se de doces</h2>
+        <p id="penance-message">Hoje, lembre-se de oferecer este pequeno sacrifício com amor.</p>
+        <div class="sunday-note" id="sunday-note" hidden>📅 <span>Hoje é domingo. Segundo a prática comum da Igreja, você pode suspender sua penitência, se desejar. Continue rezando normalmente.</span></div>
+        <button class="button primary" id="complete-button">✓ Cumpri hoje</button>
+      </article>
+      <article class="panel prayer-panel">
+        <p class="eyebrow">Oração da Quaresma</p>
+        <h2>Reserve este momento para Deus</h2>
+        <p>A oração diária sustenta a caminhada e renova a fidelidade do coração.</p>
+        <a class="button gold" href="https://drive.google.com/file/d/1B0FDqBA9b5IPEd6R1EyRSsEL8SJP4oio/view?usp=sharing" target="_blank" rel="noopener">📖 Abrir oração <span>↗</span></a>
+      </article>
+    </section>
+
+    <section class="section stats-section" id="estatisticas">
+      <div class="section-heading"><div><p class="eyebrow">Sua jornada</p><h2>Estatísticas</h2></div><span class="ornament">✦</span></div>
+      <div class="stats-grid">
+        <article class="stat"><span>🙏</span><strong id="stat-prayers">0</strong><small>Dias rezados</small></article>
+        <article class="stat"><span>✦</span><strong id="stat-penance">0</strong><small>Penitências cumpridas</small></article>
+        <article class="stat"><span>⌛</span><strong id="stat-remaining">40</strong><small>Dias restantes</small></article>
+        <article class="stat"><span>🔥</span><strong id="stat-streak">0</strong><small>Sequência atual</small></article>
+      </div>
+    </section>
+
+    <section class="section calendar-section" id="calendario">
+      <div class="section-heading"><div><p class="eyebrow">Passo a passo</p><h2>Calendário da Quaresma</h2></div><button class="text-button" id="today-button">Voltar para hoje ↓</button></div>
+      <div class="calendar-legend"><span><i class="dot done"></i> Concluído</span><span><i class="dot current"></i> Hoje</span><span><i class="dot future"></i> Futuro</span><span><i class="dot sunday"></i> Domingo (oração)</span></div>
+      <div class="calendar" id="calendar" aria-live="polite"></div>
+    </section>
+  </main>
+  <footer><span>✠</span> Que São Miguel Arcanjo defenda você no combate.</footer>
+  <div id="confetti" class="confetti" aria-hidden="true"></div>
+  <script src="script.js"></script>
+</body>
+</html>
