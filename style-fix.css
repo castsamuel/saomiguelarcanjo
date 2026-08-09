@@ -1,11 +1,20 @@
-/* Garante que o atributo HTML hidden prevaleça sobre os layouts dos cartões e modais. */
-[hidden] { display: none !important; }
+[hidden] {
+  display: none !important;
+}
 
-.dot.sunday { background: var(--gold); }
-.day-card.sunday { background: color-mix(in srgb, var(--surface2) 64%, var(--surface)); opacity: .86; }
-.day-card.sunday .day-number { color: var(--gold); }
+.dot.sunday {
+  background: var(--gold);
+}
 
-/* Ajustes finais para a experiência em celulares. */
+.day-card.sunday {
+  background: color-mix(in srgb, var(--surface2) 64%, var(--surface));
+  opacity: .86;
+}
+
+.day-card.sunday .day-number {
+  color: var(--gold);
+}
+
 @media (max-width: 760px) {
   .topbar { height: 62px; }
   .header-actions time { font-size: .75rem; }
